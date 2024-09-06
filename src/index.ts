@@ -134,19 +134,19 @@ function fillOrder(orderId: string, price: number, quantity: number, side: "buy"
 }
 
 function getFillAmount(price: number, quantity: number, side: "buy" | "sell"): number {
-    let fillAmount = 0;
+    let filled = 0;
     if (side === 'buy') {
         orderbook.asks.forEach(o => {
-            if (o.price <= price) {
-                fillAmount += o.quantity;
+            if (o.price < price) {
+                filled += Math.min(quantity, o.quantity);
             }
         });
     } else {
         orderbook.bids.forEach(o => {
-            if (o.price >= price) {
-                fillAmount += o.quantity;
+            if (o.price > price) {
+                filled += Math.min(quantity, o.quantity);
             }
         });
     }
-    return fillAmount;
+    return filled;
 }
