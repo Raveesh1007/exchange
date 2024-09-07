@@ -114,6 +114,7 @@ function fillOrder(orderId: string, price: number, quantity: number, side: "buy"
             }
         });
 
+
         // Place on the book if order not filled
         if (quantity !== 0) {
             orderbook.asks.push({
@@ -125,6 +126,9 @@ function fillOrder(orderId: string, price: number, quantity: number, side: "buy"
             bookWithQuantity.asks[price] = (bookWithQuantity.asks[price] || 0) + (quantity);
         }
     }
+
+        console.log("orderbook");
+        console.log(orderbook);
 
     return {
         status: 'accepted',
